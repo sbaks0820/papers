@@ -9,7 +9,7 @@ I need to be aways online unlike in Bitcoin.
 I also want some source of true blockchain data without 1/2 parties in the channel having to run a full node.
 *When you receive coins you want to know as soon as you receive them so that you can grab money back from an invalid close.*
 
-Simple Approaches and Why They Fail
+Simple Approache and Why It Fail
 -----------------------------------
 Trust a friend to monitor all transaction in the channel or reward them for stopping an illegal close.
 But... we want them to stop invalid closes so the reward is meaningless and know they know all of your transaction history.
@@ -22,7 +22,7 @@ Want data to be private and easily stored:
     - if the data is private, might as well let _everyone_ have it, so we have more monitors
 
 Why spread the data: other nodes in the network may go offline as well, so 1 is not good enough.
-
+    - By spreading the data you only need 1 monitor to be honest and checking your channel and you're good to go!
 
 
 
