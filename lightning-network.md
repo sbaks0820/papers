@@ -40,6 +40,10 @@ Instead of one CT, there are two CTs one for each of Alice and Bob (they both sp
 Bob signs one CT and sends it to Alice. Alice signs another and sends it to Bob.
 Bob has CT1 signed by Alice and Alice has CT2 signed by Bob: either party can now sign the version of the CT they have and broadcast it to the network.
 You can distinguish between CT1 and CT2 so we can assign blame for every CT broadcast to the blockchain.
+ _____________________
+|                     |
+| Funding Transaction |
+|_____________________|
 
 - [x] Ascribe blame to broadcaster of old state.
 - [ ] Penalize broadcaster of old state.
