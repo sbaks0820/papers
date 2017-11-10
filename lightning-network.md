@@ -23,11 +23,19 @@ Order of Operations:
 Commitment transactions track the current balance of the channel since they are not broadcast to the network. With one commitment transaction exchanged, Alice and Bob can both get their refund.
 Only broadcast commitment transactions when you want to close the channel.
 
+*Necessary Property*: Each party can only broadcast the latest state of the channel otherwise incur a penalty or lose deposit. Need to: blame someone for violation, need to acct on the blame to penalize.
 
-### Naive (Broken) Approach
+### Naive (Broken) Approach - No Ability to Ascribe Blame
 When both parties change the state of the channel (update the Commitment Transaction, CT) they both sign the transaction first and once the Funding Transaction, FT, is in the blockchain the CT can be broadcast.
 When a user wants to update the channel, though, there are now two valid spends of FT and we have a race to include in the blockchain: funds stolen/incorrect state recorded/channel closed.
 
 *Note*: _Fidelity Bond_: a form of insurance protection that covers policyholders for losses that they incure as a result of fraudulent acts be specified individuals.
 
+### Naive (Broken) Approach - No Ability to Punish after Blame
+You only know who sent out an old transaction if each of Alice and Bobe have a uniquely identifiable Commitment Transaction.
+Instead of one CT, there are two CTs one for each of Alice and Bob.
+Bob signs one CT and sends it to Alice. Alice signs another and sends it to Bob.
+Bob has CT1 signed by Alice and Alice has CT2 signed by Bob: either party can now sign the version of the CT they have and broadcast it to the network.
+You can distinguish between CT1 and CT2 so we can assign blame for every CT broadcast to the blockchain.
 
+But... still not way to penalize.
