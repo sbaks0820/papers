@@ -8,7 +8,7 @@ Requirements
 
 Approach
 ---------
-Create a funding transaction that is a 2-of-2 multisignature trasnactions but *don't* sign it until Alice and Bob have both created child spend transactions that refund the money back to them.
+Create a funding transaction that is a 2-of-2 multisignature trasnactions but **don't** sign it until Alice and Bob have both created child spend transactions that refund the money back to them.
 The `SIGHASH_NOINPUT` opcode lets you do this since signature is not part of txid anymore.
 
 Order of Operations:
@@ -23,13 +23,13 @@ Order of Operations:
 Commitment transactions track the current balance of the channel since they are not broadcast to the network. With one commitment transaction exchanged, Alice and Bob can both get their refund.
 Only broadcast commitment transactions when you want to close the channel.
 
-*Necessary Property*: Each party can only broadcast the latest state of the channel otherwise incur a penalty or lose deposit. Need to: blame someone for violation, need to acct on the blame to penalize.
+**Necessary Property**: Each party can only broadcast the latest state of the channel otherwise incur a penalty or lose deposit. Need to: blame someone for violation, need to acct on the blame to penalize.
 
 ### Naive (Broken) Approach - No Ability to Ascribe Blame
 When both parties change the state of the channel (update the Commitment Transaction, CT) they both sign the transaction first and once the Funding Transaction, FT, is in the blockchain the CT can be broadcast.
 When a user wants to update the channel, though, there are now two valid spends of FT and we have a race to include in the blockchain: funds stolen/incorrect state recorded/channel closed.
 
-*Note*: _Fidelity Bond_: a form of insurance protection that covers policyholders for losses that they incure as a result of fraudulent acts be specified individuals.
+**Note**: _Fidelity Bond_: a form of insurance protection that covers policyholders for losses that they incure as a result of fraudulent acts be specified individuals.
 
 ### Naive (Broken) Approach - No Ability to Punish after Blame
 You only know who sent out an old transaction if each of Alice and Bobe have a uniquely identifiable Commitment Transaction.
