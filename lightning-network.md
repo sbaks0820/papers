@@ -28,6 +28,15 @@ Only broadcast commitment transactions when you want to close the channel.
 ### Naive (Broken) Approach - No Ability to Ascribe Blame
 When both parties change the state of the channel (update the Commitment Transaction, CT) they both sign the transaction first and once the Funding Transaction, FT, is in the blockchain the CT can be broadcast.
 When a user wants to update the channel, though, there are now two valid spends of FT and we have a race to include in the blockchain: funds stolen/incorrect state recorded/channel closed.
+<pre>
+                                           +------------------------+
+                             +-----------> | Alice = 0.5, Bob = 0.5 | (Old state signed by both)
++---------------------+      |             +------------------------+
+| Funding Transaction | ---- +
++---------------------+      |             +------------------------+
+                             +-----------> | Alice = 0.4, Bob = 0.6 | (Newest state signe by both)
+                                           +------------------------+
+</pre>             
 
 - [ ] Ascribe blame to broadcaster of old state.
 - [ ] Penalize broadcaster of old state.
@@ -42,11 +51,11 @@ Bob has CT1 signed by Alice and Alice has CT2 signed by Bob: either party can no
 You can distinguish between CT1 and CT2 so we can assign blame for every CT broadcast to the blockchain.
 <pre>
                                            +------------------------+
-                             +-----------> | Alice = 0.5, Bob = 0.5 | (CT1)
+                             +-----------> | Alice = 0.5, Bob = 0.5 | (CT1, signed by Alice)
 +---------------------+      |             +------------------------+
-| Funding Transaction | ---- |
+| Funding Transaction | ---- +
 +---------------------+      |             +------------------------+
-                             +-----------> | Alice = 0.4, Bob = 0.6 | (CT2)
+                             +-----------> | Alice = 0.4, Bob = 0.6 | (CT2, signed by Bob)
                                            +------------------------+
 </pre>             
 
@@ -55,3 +64,5 @@ You can distinguish between CT1 and CT2 so we can assign blame for every CT broa
 
 
 But... still not way to penalize.
+
+
