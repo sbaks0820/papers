@@ -32,7 +32,7 @@ When a user wants to update the channel, though, there are now two valid spends 
                                            +------------------------+
                              +-----------> | Alice = 0.5, Bob = 0.5 | (Old state signed by both)
 +---------------------+      |             +------------------------+
-| Funding Transaction | ---- +
+| Funding Transaction | ---- +                                                                  ==> no way to differentiate the two CTs because they were both signed by both people from the beginning.
 +---------------------+      |             +------------------------+
                              +-----------> | Alice = 0.4, Bob = 0.6 | (Newest state signe by both)
                                            +------------------------+
@@ -53,16 +53,19 @@ You can distinguish between CT1 and CT2 so we can assign blame for every CT broa
                                            +------------------------+
                              +-----------> | Alice = 0.5, Bob = 0.5 | (CT1, signed by Alice)
 +---------------------+      |             +------------------------+
-| Funding Transaction | ---- +
+| Funding Transaction | ---- +                                                                  ==> each party can only broadcast a CT already signed by the counterparty, so source of CT can be identified.
 +---------------------+      |             +------------------------+
                              +-----------> | Alice = 0.4, Bob = 0.6 | (CT2, signed by Bob)
                                            +------------------------+
-</pre>             
+</pre>
 
 - [x] Ascribe blame to broadcaster of old state.
 - [ ] Penalize broadcaster of old state.
 
 
 But... still not way to penalize.
+
+### Approach - Ascribe Blame and Punish Violator
+
 
 
