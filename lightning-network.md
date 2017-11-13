@@ -67,5 +67,16 @@ But... still not way to penalize.
 
 ### Approach - Ascribe Blame and Punish Violator
 
+Keep relatively the same structure as before, but this time the commitment transactions are updated with a unique output. 
+Alice and Bob exchange self-signed half transactions with each other that include how much they are going to be payed.
+For example, Alice creates a transaction where one output pays herself 4 BTC and the other output is a multi-sig.
+There are two ways to redeem the multisig:
+1. Bob can sign the output and receive the funds after a time lock of ~1000 blocks. Once the time has elapsed he only needs to sign the output and can claim the funds.
+2. The other way is for Alice to use the secret whose hash Bob has given her to claim the output before Bob's 1000 block timelock runs out.
+
+The second case is what prevents the rebroadcasting of old states by Bob. Whenever, the commitment trasnactions are updated, Bob and Alice shared the pre-images of the hashes they used in the precious CTs.
+Since Alice now knows the pre-images of the hash, if Bob attempts to broadcast an old state, Alice can unilaterally sign the output, provide the secret and claim all of Bob's bitcoin before his 1000 block timelock runs out.
+
+![alt text](./images/bidirectionalopen.jpg "Bi-directional payment channel open/update")
 
 
