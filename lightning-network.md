@@ -4,7 +4,12 @@ Lightning Network
 Requirements
 ------------
 * `SIGHASH_NOINPUT` opcode included in Segwit soft fork that allows spends to be created on transactions that haven't been signed yet.
-
+* 2-of-2 multisig:
+![alt text](./images/multisig.jpg "2-of-2 multisig")
+* Time lock transactions
+![alt text](./images/timelock.jpg "timelock")
+* Output reveal secret
+![alt text](./images/secretoutput.jpg "reveal secret")
 
 Approach
 ---------
